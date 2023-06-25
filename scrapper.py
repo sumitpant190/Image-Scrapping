@@ -11,7 +11,7 @@ def get_images_from_google(wd, delay, max_images):
         time.sleep(delay)
 
     # give the required url here
-    url = 'https://www.google.com/search?q=pashupatinath&tbm=isch&ved=2ahUKEwjn8peFmdv_AhXNyKACHUCVDRkQ2-cCegQIABAA&oq=pashupatinath&gs_lcp=CgNpbWcQDFAAWABgAGgAcAB4AIABAIgBAJIBAJgBAKoBC2d3cy13aXotaW1n&sclient=img&ei=94GWZKebK82Rg8UPwKq2yAE&bih=796&biw=1440&rlz=1C5CHFA_enNP1032NP1032'
+    url = 'https://www.google.com/search?q=lumbini&tbm=isch&ved=2ahUKEwjwgrzJmt7_AhUsrmMGHZZEDYsQ2-cCegQIABAA&oq=lumbini&gs_lcp=CgNpbWcQDFAAWABgAGgAcAB4AIABAIgBAJIBAJgBAKoBC2d3cy13aXotaW1n&sclient=img&ei=OhaYZPD9IazcjuMPlom12Ag&bih=821&biw=1440&rlz=1C5CHFA_enNP1032NP1032'
 
     wd.get(url)
 
@@ -36,7 +36,7 @@ def get_images_from_google(wd, delay, max_images):
                 if image.get_attribute('src') and 'http' in image.get_attribute('src'):
                     url = image.get_attribute('src')
                     print(f'Found: {url}')
-                    download_image('./images/', url, f'image{len(image_urls)+1}.jpg')
+                    download_image('./images/Lumbini/', url, f'image{len(image_urls)+1}.jpg')
                     image_urls.append(url)
 
         scroll_down()
@@ -69,7 +69,7 @@ options.add_argument('--headless')  # Run WebDriver in headless mode (no GUI)
 wd = webdriver.Chrome(executable_path=webdriver_path, options=options)
 
 # Scrape images and download
-urls = get_images_from_google(wd, 3, 100)
+urls = get_images_from_google(wd, 0.1, 150)
 
 # Quit WebDriver
 wd.quit()
