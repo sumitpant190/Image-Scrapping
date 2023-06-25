@@ -1,0 +1,4 @@
+selenium
+requests
+
+# download latest webdriver (chromedriver for google chrome)
