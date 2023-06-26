@@ -10,7 +10,7 @@ def get_images_from_google(wd, delay, max_images):
         wd.execute_script("window.scrollTo(0,document.body.scrollHeight);")
         time.sleep(delay)
 
-    url = 'https://www.google.com/search?rlz=1C5CHFA_enNP1032NP1032&sxsrf=APwXEdf2hMbCziKF_g_YQHuClE_SMpOxOA:1687690308726&q=patan+durbar+square&tbm=isch&sa=X&ved=2ahUKEwiCqd6qoN7_AhUDV2wGHaFrBRwQ0pQJegQICxAB&biw=1440&bih=821&dpr=2'
+    url = input("Enter the Google Images URL: ")
 
     wd.get(url)
 
@@ -33,7 +33,7 @@ def get_images_from_google(wd, delay, max_images):
                     print(f'Found: {url}')
 
                     try:
-                        download_image('./Patan-Durbar-Square/', url, f'image{len(image_urls)+1}.jpg', timeout=10)
+                        download_image(download_folder, url, f'image{len(image_urls)+1}.jpg', timeout=10)
                         image_urls.append(url)
                     except TimeoutError:
                         print(f'Skipped: {url} (Timeout)')
@@ -62,8 +62,12 @@ def download_image(download_path, url, filename, timeout):
         print(f'Failed - {e}')
 
 
-# Specify the path to the WebDriver executable
-webdriver_path = '/Users/nirajanpaudel17/Documents/Python/Major-Project/chromedriver'  # Replace with the actual path
+# User input for URL, download folder, number of images, and delay time
+google_images_url = input("Enter the Google Images URL: ")
+download_folder = input("Enter the download folder path: ")
+num_images = int(input("Enter the number of images to scrape: "))
+delay_time = int(input("Enter the delay time in SECONDS: "))
+webdriver_path = input("Enter the ChromeDriver executable path: ")
 
 # Set up WebDriver
 options = webdriver.ChromeOptions()
@@ -71,7 +75,7 @@ options.add_argument('--headless')  # Run WebDriver in headless mode
 wd = webdriver.Chrome(executable_path=webdriver_path, options=options)
 
 # Scrape images and download
-urls = get_images_from_google(wd, 0.1, 150)
+urls = get_images_from_google(wd, delay_time, num_images)
 
 # Quit WebDriver
 wd.quit()
